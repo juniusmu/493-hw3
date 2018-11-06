@@ -20,8 +20,7 @@ app.controller('searchResult',[ '$scope', '$http', function($scope, $http) {
    		let artistName = getArtistNameFromHtmlElementId(event.currentTarget.id);
 		
 		let singleArtistName = getOneArtistNameFromArtistName(artistName);
-		alert(singleArtistName);
-   		getArtistInformation();
+   		getArtistInformation(singleArtistName);
    };
    function getOneArtistNameFromArtistName(artistName){
    	let chunksOfArtistName = artistName.split(" ", 3);
@@ -62,11 +61,23 @@ app.controller('searchResult',[ '$scope', '$http', function($scope, $http) {
 	let artistName = artistElement["originalName"];
 	return artistName;
    }
-   function getArtistInformation(){
+   function getArtistInformation(artistName){
+   	let artistNameWithoutSpaces = artistName.replace(" ", "+");
+   	let url = 'https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch='+artistNameWithoutSpaces+'&format=json&callback=JSON_CALLBACK'
+   	$http.jsonp(url).then(function(response) {
+	    console.log(response.data);
+	    $scope["artistInformation"] = response.data["query"]["search"][0]["snippet"];
+	}, function (response) {
+	      console.log(response)
+	 	});
    }
 
+   	function getUniqueIdFromArtistName(artistName){
+
+   	}
   	function getArtistDescription(artistName){
   		console.log("Searching for " + artistName);
+  		artistName
   		let testUrl = "https://itunes.apple.com/search?term="+artistName+"&country=US";
   		let numberOfResults = 0;
   		$http.get(testUrl)

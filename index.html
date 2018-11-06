@@ -71,11 +71,11 @@ h5{
       </div>
       <div class = "col-lg-6 col-md-6 col-sm-6">
         <ul class="nav nav-tabs">
-          <li class="active"><a data-toggle="tab" href="#description">Description</a></li>
+          <li id="{{'descriptionTab-' + results[secondInPair - 1]['uniqueId']}}" class="active"><a data-toggle="tab" href="{{'#description-' + results[secondInPair - 1]['uniqueId']}}">Description</a></li>
           <li id="{{'artistInforTab-' + results[secondInPair - 1]['uniqueId']}}" ng-click="getArtistInfor($event)"><a data-toggle="tab" href="{{'#artistInfor-' + results[secondInPair - 1]['uniqueId'] }}">Artist Infor.</a></li>
         </ul>
         <div class="tab-content">
-          <div id="description" class="tab-pane fade in active">
+          <div id="{{'description-' + results[secondInPair - 1]['uniqueId']}}" class="tab-pane fade in active">
             <p>Artist Name: {{results[secondInPair - 1]["name"]}}</p>
             <p>Collection Name: {{results[secondInPair - 1]['collectionName']}}</p>
             <p>Pricing: ${{results[secondInPair - 1]['collectionPrice']}}</p>
@@ -96,11 +96,11 @@ h5{
       </div>
       <div class = "col-lg-6 col-md-6 col-sm-6">
         <ul class="nav nav-tabs">
-          <li class="active"><a data-toggle="tab" href="#description1">Description</a></li>
+          <li id="{{'descriptionTab-' + results[secondInPair]['uniqueId']}}" class="active"><a data-toggle="tab" href="{{'#description-' + results[secondInPair]['uniqueId']}}">Description</a></li>
           <li id="{{'artistInforTab-' + results[secondInPair]['uniqueId']}}" ng-click="getArtistInfor($event)"><a data-toggle="tab" href="{{'#artistInfor-' + results[secondInPair]['uniqueId'] }}">Artist Infor.</a></li>
         </ul>
         <div class="tab-content">
-          <div id="description1" class="tab-pane fade in active">
+          <div id="{{'description-' + results[secondInPair]['uniqueId']}}" class="tab-pane fade in active">
             <p>Artist Name: {{results[secondInPair]["name"]}}</p>
             <p>Collection Name: {{results[secondInPair]['collectionName']}}</p>
             <p>Pricing: ${{results[secondInPair]['collectionPrice']}}</p>
@@ -125,11 +125,11 @@ h5{
     </div>
     <div class = "col-lg-6 col-md-6 col-sm-6">
         <ul class="nav nav-tabs">
-          <li class="active"><a data-toggle="tab" href="#description2">Description</a></li>
+          <li id="{{'descriptionTab-' + results[results.length - 1]['uniqueId']}}"class="active"><a data-toggle="tab" href="{{'#description-' + results[results.length - 1]['uniqueId']}}">Description</a></li>
           <li id="{{'artistInforTab-' + results[results.length - 1]['uniqueId']}}" ng-click="getArtistInfor($event)"><a data-toggle="tab" href="{{'#artistInfor-' + results[results.length - 1]['uniqueId'] }}">artistInfor</a></li>
         </ul>
         <div class="tab-content">
-          <div id="description2" class="tab-pane fade in active">
+          <div id="{{'description-' + results[results.length - 1]['uniqueId']}}" class="tab-pane fade in active">
             <p>Artist Name: {{results[results.length - 1]["name"]}}</p>
             <p>Collection Name: {{results[results.length - 1]['collectionName']}}</p>
             <p>Pricing: ${{results[results.length - 1]['collectionPrice']}}</p>

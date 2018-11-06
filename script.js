@@ -44,7 +44,7 @@ app.controller('searchResult',[ '$scope', '$http', function($scope, $http) {
   					result["imageUrl"] = results[i]["artworkUrl100"];
   					result["collectionName"] = results[i]["collectionName"];
   					result["collectionPrice"] = results[i]["collectionPrice"];
-  					result["type"] = results[i]["type"];
+  					result["type"] = results[i]["kind"];
   					result["previewUrl"] = results[i]["previewUrl"];
 
 

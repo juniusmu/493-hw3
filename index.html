@@ -81,7 +81,7 @@ h5{
           <div id="description" class="tab-pane fade in active">
             <p>Artist Name: {{results[secondInPair - 1]["name"]}}</p>
             <p>Collection Name: {{results[secondInPair - 1]['collectionName']}}</p>
-            <p>Pricing: {{results[secondInPair - 1]['collectionPrice']}}</p>
+            <p>Pricing: ${{results[secondInPair - 1]['collectionPrice']}}</p>
             <p>Type: {{results[secondInPair - 1]['type']}}</p>
             <p>Preview: <a href="{{results[secondInPair - 1]['previewUrl']}}">Link</a></p>
           </div>
@@ -107,7 +107,7 @@ h5{
           <div id="description1" class="tab-pane fade in active">
             <p>Artist Name: {{results[secondInPair]["name"]}}</p>
             <p>Collection Name: {{results[secondInPair - 1]['collectionName']}}</p>
-            <p>Pricing: {{results[secondInPair]['collectionPrice']}}</p>
+            <p>Pricing: ${{results[secondInPair]['collectionPrice']}}</p>
             <p>Type: {{results[secondInPair]['type']}}</p>
             <p>Preview: <a href="{{results[secondInPair]['previewUrl']}}">Link</a></p>
           </div>
@@ -137,7 +137,7 @@ h5{
           <div id="description2" class="tab-pane fade in active">
             <p>Artist Name: {{results[results.length - 1]["name"]}}</p>
             <p>Collection Name: {{results[results.length - 1]['collectionName']}}</p>
-            <p>Pricing: {{results[results.length - 1]['collectionPrice']}}</p>
+            <p>Pricing: ${{results[results.length - 1]['collectionPrice']}}</p>
             <p>Type: {{results[results.length - 1]['type']}}</p>
             <p>Preview: <a href="{{results[results.length - 1]['previewUrl']}}">Link</a></p>
           </div>

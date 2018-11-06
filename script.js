@@ -19,16 +19,10 @@ app.controller('searchResult',[ '$scope', '$http', function($scope, $http) {
    		console.log(event.currentTarget.id);
    		let uniqueElementId = parseInt(event.currentTarget.id.split("-")[1]);
    		let artistName = getArtistNameFromHtmlElementId(event.currentTarget.id);
-		alert("yayaya");
 		let singleArtistName = getOneArtistNameFromArtistName(artistName);
-		alert(singleArtistName);
    		let artistInformation = getArtistInformation(singleArtistName,uniqueElementId);
-   		// alert(artistInformation);
-   		// let cleanArtistInformation = getCleanArtistInformation(artistInformation);
-   		// alert(cleanArtistInformation);
    };
    function getCleanArtistInformation(artistInformation){
-   	alert(artistInformation);
    	while(artistInformation.indexOf("<")  != -1 ||
    		artistInformation.indexOf(">") != -1){
    		let leftIndex = artistInformation.indexOf("<");
@@ -77,35 +71,32 @@ app.controller('searchResult',[ '$scope', '$http', function($scope, $http) {
 	return artistName;
    }
    function getArtistInformation(artistName,elementId){
-   	let artistNameWithoutSpaces = artistName.replace(" ", "+");
-   	let url = 'https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch='+artistNameWithoutSpaces+'&format=json&callback=JSON_CALLBACK'
-   	$http.jsonp(url).then(function(response) {
-   		console.log("response data");
-	    console.log(response.data);
-	    console.log("BEFORE:");
-	    console.log(response.data["query"]["search"][0]["snippet"]);
-	    let information = response.data["query"]["search"][0]["snippet"];
-	    let cleanArtistInformation = "Sorry, there is no information for this artist!";
-	    if(information.length != 0){
-	    	cleanArtistInformation = getCleanArtistInformation(information);
-	    }
-	    console.log("AFTER:");
-	    console.log(cleanArtistInformation);
-	    $scope["originalArtistInformation"] = cleanArtistInformation;
-	    if(cleanArtistInformation.length > 100){
-	    	$scope[elementId]["artistInformation"] = cleanArtistInformation.substring(0,100) + "...";
-	    }
-	    console.log($scope["artistInformation"]);
-	}, function (response) {
-	      console.log(response)
-	 	});
-   }
+	   	let artistNameWithoutSpaces = artistName.replace(" ", "+");
+	   	let url = 'https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch='+artistNameWithoutSpaces+'&format=json&callback=JSON_CALLBACK'
+	   	$http.jsonp(url).then(function(response) {
+	   		console.log("response data");
+		    console.log(response.data);
 
-   	function getUniqueIdFromArtistName(artistName){
-   		let artistElement = $scope.results.find(function(element){
-		return element[""] == uniqueArtistId;
-	})
-   	}
+		    let cleanArtistInformation = "Sorry, there is no information for this artist!";
+		    if( response.data["query"]["search"].length != 0){
+		    	console.log("BEFORE:");
+		    	console.log(response.data["query"]["search"][0]["snippet"]);
+		    	let information = response.data["query"]["search"][0]["snippet"];
+		    	cleanArtistInformation = getCleanArtistInformation(information);
+		    }
+		    console.log("AFTER:");
+		    console.log(cleanArtistInformation);
+		    $scope.results[elementId]["originalArtistInformation"] = cleanArtistInformation;
+		    console.log(elementId);
+		    if(cleanArtistInformation.length > 100){
+		    	$scope.results[elementId]["artistInformation"] = cleanArtistInformation.substring(0,100) + "...";
+		    }else{$scope.results[elementId]["artistInformation"] = cleanArtistInformation;}
+		    console.log($scope.results[elementId]["artistInformation"]);
+		}, function (response) {
+		      console.log(response)
+		 	});
+    }
+
   	function getArtistDescription(artistName){
   		console.log("Searching for " + artistName);
   		artistName
@@ -121,6 +112,7 @@ app.controller('searchResult',[ '$scope', '$http', function($scope, $http) {
   			console.log(results);
   			numberOfResults = results.length;
   			if(numberOfResults == 0){
+  				// Keep this alert
   				alert("No results found for: " + artistName);
   			}else{ //adds the pair of artists to an array
   				//reset when searching for a new artist

@@ -11,12 +11,15 @@ app.controller('searchResult',[ '$scope', '$http', function($scope, $http) {
   	let keyCode = event.keyCode;
   	let enterKeyCode = 13;
   	if(keyCode == enterKeyCode){
-  		getArtistInformation($scope.artistName);
+  		getArtistDescription($scope.artistName);
   	}
-  	
-  	// TODO: add the values of the new results array into the html
+   };
 
-  	function getArtistInformation(artistName){
+   $scope.getArtistInfor = function(event){
+   		console.log(event.currentTarget.id);
+   };
+
+  	function getArtistDescription(artistName){
   		console.log("Searching for " + artistName);
   		let testUrl = "https://itunes.apple.com/search?term="+artistName+"&country=US";
   		let numberOfResults = 0;
@@ -39,7 +42,10 @@ app.controller('searchResult',[ '$scope', '$http', function($scope, $http) {
   						$scope.resultPairIndexes.push(i);
   					}
   					result = {};
+  					result["originalName"] = results[i]["artistName"];
+  					result["originalCollectionName"] = results[i]["collectionName"];
   					result["artistId"] = results[i]["artistId"];
+  					result["uniqueId"] = i; 
   					result["imageUrl"] = results[i]["artworkUrl100"];
   					result["collectionPrice"] = results[i]["collectionPrice"];
   					result["type"] = results[i]["kind"];
@@ -53,17 +59,10 @@ app.controller('searchResult',[ '$scope', '$http', function($scope, $http) {
   					}else{result["collectionName"] = results[i]["collectionName"];}
   					$scope.results.push(result);
   				}
-  				console.log("new results array:");
-  				console.log($scope.results);
-  				console.log("That is all of the indexes");
-  				console.log("resultPairIndexes:");
-  				console.log($scope.resultPairIndexes)
-
   			}
   		}, function(response){
   			alert("Something went wrong :(");
   			console.log(response);
   		});
   	}
-  };
 }]);

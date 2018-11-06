@@ -75,7 +75,8 @@ h5{
       <div class = "col-lg-6 col-md-6 col-sm-6">
         <ul class="nav nav-tabs">
           <li class="active"><a data-toggle="tab" href="#description">Description</a></li>
-          <li><a data-toggle="tab" href="#artistInfor">artistInfor</a></li>
+          <!-- TODO: add a unique id to every Artist Info tab. same id as artist id. Then create on click function that prints out the id of the element that was clicked -->
+          <li id="{{'artistInforTab-' + results[secondInPair - 1]['uniqueId']}}" ng-click="getArtistInfor($event)"><a data-toggle="tab" href="#artistInfor">Artist Infor.</a></li>
         </ul>
         <div class="tab-content">
           <div id="description" class="tab-pane fade in active">
@@ -85,7 +86,7 @@ h5{
             <p>Type: {{results[secondInPair - 1]['type']}}</p>
             <p>Preview: <a href="{{results[secondInPair - 1]['previewUrl']}}">Link</a></p>
           </div>
-          <div id="artistInfor" class="tab-pane fade">
+          <div id="{{'artistInfor-' + results[secondInPair - 1]['uniqueId']}}" class="tab-pane fade">
             <h3>artist Infor.</h3>
             <p>This is the artist information</p>
           </div>
@@ -101,7 +102,7 @@ h5{
       <div class = "col-lg-6 col-md-6 col-sm-6">
         <ul class="nav nav-tabs">
           <li class="active"><a data-toggle="tab" href="#description1">Description</a></li>
-          <li><a data-toggle="tab" href="#artistInfor1">artistInfor</a></li>
+          <li id="{{'artistInforTab-' + results[secondInPair]['uniqueId']}}" ng-click="getArtistInfor($event)"><a data-toggle="tab" href="#artistInfor1">Artist Infor.</a></li>
         </ul>
         <div class="tab-content">
           <div id="description1" class="tab-pane fade in active">
@@ -111,7 +112,7 @@ h5{
             <p>Type: {{results[secondInPair]['type']}}</p>
             <p>Preview: <a href="{{results[secondInPair]['previewUrl']}}">Link</a></p>
           </div>
-          <div id="artistInfor1" class="tab-pane fade">
+          <div id="{{'artistInfor-' + results[secondInPair]['uniqueId']}}" class="tab-pane fade">
             <h3>artist Infor.</h3>
             <p>This is the artist information</p>
           </div>
@@ -131,7 +132,7 @@ h5{
     <div class = "col-lg-6 col-md-6 col-sm-6">
         <ul class="nav nav-tabs">
           <li class="active"><a data-toggle="tab" href="#description2">Description</a></li>
-          <li><a data-toggle="tab" href="#artistInfor2">artistInfor</a></li>
+          <li id="{{'artistInforTab-' + results[results.length - 1]['uniqueId']}}" ng-click="getArtistInfor($event)"><a data-toggle="tab" href="#artistInfor2">artistInfor</a></li>
         </ul>
         <div class="tab-content">
           <div id="description2" class="tab-pane fade in active">
@@ -141,7 +142,7 @@ h5{
             <p>Type: {{results[results.length - 1]['type']}}</p>
             <p>Preview: <a href="{{results[results.length - 1]['previewUrl']}}">Link</a></p>
           </div>
-          <div id="artistInfor2" class="tab-pane fade">
+          <div id="{{'artistInforTab-' + results[results.length - 1]['uniqueId']}}" class="tab-pane fade">
             <h3>artist Infor.</h3>
             <p>This is the artist information</p>
           </div>

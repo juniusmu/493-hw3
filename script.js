@@ -17,11 +17,26 @@ app.controller('searchResult',[ '$scope', '$http', function($scope, $http) {
 
    $scope.getArtistInfor = function(event){
    		console.log(event.currentTarget.id);
+   		let uniqueElementId = parseInt(event.currentTarget.id.split("-")[1]);
    		let artistName = getArtistNameFromHtmlElementId(event.currentTarget.id);
-		
+		alert("yayaya");
 		let singleArtistName = getOneArtistNameFromArtistName(artistName);
-   		getArtistInformation(singleArtistName);
+		alert(singleArtistName);
+   		let artistInformation = getArtistInformation(singleArtistName,uniqueElementId);
+   		// alert(artistInformation);
+   		// let cleanArtistInformation = getCleanArtistInformation(artistInformation);
+   		// alert(cleanArtistInformation);
    };
+   function getCleanArtistInformation(artistInformation){
+   	alert(artistInformation);
+   	while(artistInformation.indexOf("<")  != -1 ||
+   		artistInformation.indexOf(">") != -1){
+   		let leftIndex = artistInformation.indexOf("<");
+   		let rightIndex = artistInformation.indexOf(">");
+   		artistInformation = artistInformation.replace(artistInformation.substring(leftIndex, rightIndex + 1), "");
+   	}
+   	return artistInformation;
+   }
    function getOneArtistNameFromArtistName(artistName){
    	let chunksOfArtistName = artistName.split(" ", 3);
    	if(chunksOfArtistName[0].includes(",")){
@@ -61,19 +76,35 @@ app.controller('searchResult',[ '$scope', '$http', function($scope, $http) {
 	let artistName = artistElement["originalName"];
 	return artistName;
    }
-   function getArtistInformation(artistName){
+   function getArtistInformation(artistName,elementId){
    	let artistNameWithoutSpaces = artistName.replace(" ", "+");
    	let url = 'https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch='+artistNameWithoutSpaces+'&format=json&callback=JSON_CALLBACK'
    	$http.jsonp(url).then(function(response) {
+   		console.log("response data");
 	    console.log(response.data);
-	    $scope["artistInformation"] = response.data["query"]["search"][0]["snippet"];
+	    console.log("BEFORE:");
+	    console.log(response.data["query"]["search"][0]["snippet"]);
+	    let information = response.data["query"]["search"][0]["snippet"];
+	    let cleanArtistInformation = "Sorry, there is no information for this artist!";
+	    if(information.length != 0){
+	    	cleanArtistInformation = getCleanArtistInformation(information);
+	    }
+	    console.log("AFTER:");
+	    console.log(cleanArtistInformation);
+	    $scope["originalArtistInformation"] = cleanArtistInformation;
+	    if(cleanArtistInformation.length > 100){
+	    	$scope[elementId]["artistInformation"] = cleanArtistInformation.substring(0,100) + "...";
+	    }
+	    console.log($scope["artistInformation"]);
 	}, function (response) {
 	      console.log(response)
 	 	});
    }
 
    	function getUniqueIdFromArtistName(artistName){
-
+   		let artistElement = $scope.results.find(function(element){
+		return element[""] == uniqueArtistId;
+	})
    	}
   	function getArtistDescription(artistName){
   		console.log("Searching for " + artistName);

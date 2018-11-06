@@ -25,29 +25,32 @@ app.controller('searchResult',[ '$scope', '$http', function($scope, $http) {
   			console.log("Success");
   			// KEEP THIS CONSOLE.LOG for grading
   			console.log(response);
+  			$scope.artistSearchResponse = response;
   			let results = response['data']['results'];
   			console.log(results);
   			numberOfResults = results.length;
   			if(numberOfResults == 0){
   				alert("No results found for: " + artistName);
   			}else{ //adds the pair of artists to an array
-  				console.log("Here are the indexes");
   				//reset when searching for a new artist
   				$scope.resultPairIndexes = [];
   				for(i = 0; i < results.length; ++i){
   					if(i % 2 == 1){
   						$scope.resultPairIndexes.push(i);
-  						console.log(i);
   					}
   					result = {};
-  					result["name"] = results[i]["artistName"];
+  					result["artistId"] = results[i]["artistId"];
   					result["imageUrl"] = results[i]["artworkUrl100"];
-  					result["collectionName"] = results[i]["collectionName"];
   					result["collectionPrice"] = results[i]["collectionPrice"];
   					result["type"] = results[i]["kind"];
   					result["previewUrl"] = results[i]["previewUrl"];
 
-
+  					if(results[i]["artistName"].length > 25){
+  						result["name"] = results[i]["artistName"].substring(0,25) + "...";
+  					}else{result["name"] = results[i]["artistName"];}
+  					if(results[i]["collectionName"].length > 25){
+  						result["collectionName"] = results[i]["collectionName"].substring(0,25) + "...";
+  					}else{result["collectionName"] = results[i]["collectionName"];}
   					$scope.results.push(result);
   				}
   				console.log("new results array:");

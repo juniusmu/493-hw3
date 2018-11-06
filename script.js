@@ -17,7 +17,53 @@ app.controller('searchResult',[ '$scope', '$http', function($scope, $http) {
 
    $scope.getArtistInfor = function(event){
    		console.log(event.currentTarget.id);
+   		let artistName = getArtistNameFromHtmlElementId(event.currentTarget.id);
+		
+		let singleArtistName = getOneArtistNameFromArtistName(artistName);
+		alert(singleArtistName);
+   		getArtistInformation();
    };
+   function getOneArtistNameFromArtistName(artistName){
+   	let chunksOfArtistName = artistName.split(" ", 3);
+   	if(chunksOfArtistName[0].includes(",")){
+   		return chunksOfArtistName[0].replace(",","");
+   	}
+   	if(chunksOfArtistName.length > 1){
+   		if(chunksOfArtistName[1].includes("and") ||
+   			chunksOfArtistName[1].includes("&")){
+   				return chunksOfArtistName[0];
+   		}
+   		if(chunksOfArtistName[1].includes(",")){
+   			return chunksOfArtistName[0] + " " +chunksOfArtistName[1].replace(",","");
+   		}
+   		if(chunksOfArtistName.length > 2){
+   			if(chunksOfArtistName[2].includes("and") ||
+	   			chunksOfArtistName[2].includes("&")){
+	   				return chunksOfArtistName[0] + chunksOfArtistName[1];
+	   		}
+	   		if(chunksOfArtistName[2].includes(",")){
+	   			return chunksOfArtistName[0] + " " + chunksOfArtistName[1] +" "+chunksOfArtistName[2].replace(",","");
+	   		}
+   		}
+
+   	}
+   	let name = chunksOfArtistName[0];
+   	for(i = 1; i < chunksOfArtistName.length; ++ i){
+   		name = name + " " + chunksOfArtistName[i];
+   	}
+   	return name;
+   }
+   function getArtistNameFromHtmlElementId(htmlElementId){
+   	let uniqueArtistId = parseInt(htmlElementId.split("-")[1]);
+	//get name of artist from uniqueId
+	let artistElement = $scope.results.find(function(element){
+		return element["uniqueId"] == uniqueArtistId;
+	})
+	let artistName = artistElement["originalName"];
+	return artistName;
+   }
+   function getArtistInformation(){
+   }
 
   	function getArtistDescription(artistName){
   		console.log("Searching for " + artistName);

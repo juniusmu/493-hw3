@@ -129,17 +129,17 @@ h5{
     <!-- <div class="clearfix visible-sm"></div> -->
       
     
-    <div class = "col-lg-6 col-md-6 col-sm-6 col-xs-6 searchResult"> <!-- second profile -->
-      <div class="row searchResultRow">
-          <div class = "col-lg-6 col-md-6 col-sm-6 col-xs-6 searchResultImageContainer"> <!-- image -->
-            <img class="searchResultImage" src="{{results[secondInPair]['imageUrl']}}">
+    <div class = "col-lg-6 col-md-6 col-sm-6 col-xs-6" style="margin-bottom: 100px"> <!-- second profile -->
+      <div class="row" style="display: flex;flex-wrap: wrap;">
+          <div class = "col-lg-6 col-md-6 col-sm-6 col-xs-6" style="max-width: 250px; max-height:200px; min-width: 150px; min-width: 150px; margin-top: 25px; margin-bottom: 25px;"> <!-- image -->
+            <img  src="{{results[secondInPair]['imageUrl']}}" style="width: 100%">
           </div>
-          <div class = "col-lg-6 col-md-6 col-sm-6 col-xs-6 searchResultTabsContainer"> <!-- info -->
-            <ul class="nav nav-tabs searchResultTabs">
+          <div class = "col-lg-6 col-md-6 col-sm-6 col-xs-6"> <!-- info -->
+            <ul class="nav nav-tabs">
               <li id="{{'descriptionTab-' + results[secondInPair]['uniqueId']}}" class="active"><a data-toggle="tab" href="{{'#description-' + results[secondInPair]['uniqueId']}}">Description</a></li>
               <li id="{{'artistInforTab-' + results[secondInPair]['uniqueId']}}" ng-click="getArtistInfor($event)"><a data-toggle="tab" href="{{'#artistInfor-' + results[secondInPair]['uniqueId'] }}">Artist Infor.</a></li>
             </ul>
-            <div class="tab-content searchResultTabContent">
+            <div class="tab-content">
               <div id="{{'description-' + results[secondInPair]['uniqueId']}}" class="tab-pane fade in active">
                 <p>Artist Name: {{results[secondInPair]["name"]}}</p>
                 <p>Collection Name: {{results[secondInPair]['collectionName']}}</p>
@@ -147,10 +147,9 @@ h5{
                 <p>Type: {{results[secondInPair]['type']}}</p>
                 <p>Preview: <a href="{{results[secondInPair]['previewUrl']}}">Link</a></p>
               </div>
-              <div ng-init="myParentId = results[secondInPair]['uniqueId'] " id="{{'artistInfor-' + results[secondInPair]['uniqueId']}}" class="tab-pane fade">
-              <p ng-if="isArtistInforLoading === false || myParentId != clickedArtistInforTabIdNumber">{{results[secondInPair]["artistInformation"]}}</p>
-              <img class="text-center" ng-if="isArtistInforLoading === true && myParentId == clickedArtistInforTabIdNumber" style="height:100px; width:100px" src="loading.gif">
-            </div>
+              <div id="{{'artistInfor-' + results[secondInPair]['uniqueId']}}" class="tab-pane fade">
+                <p>{{results[secondInPair]["artistInformation"]}}</p>
+              </div>
             </div>
           </div>  
       </div>

@@ -5,13 +5,14 @@ app.controller('searchResult',[ '$scope', '$http', function($scope, $http) {
   $scope.artistName = "";
   $scope.results = [];
   $scope.resultPairIndexes = [];
+  $scope.isArtistInforLoading = false;
+  $scope.clickedArtistInforTabIdNumber = -1;
   // Might not need result index
   $scope.resultIndex = 0;
   $scope.searchForArtist = function(event){
   	let keyCode = event.keyCode;
   	let enterKeyCode = 13;
   	if(keyCode == enterKeyCode){
-      alert($scope.artistName);
   		getArtistDescription($scope.artistName);
   	}
    };
@@ -19,8 +20,10 @@ app.controller('searchResult',[ '$scope', '$http', function($scope, $http) {
    $scope.getArtistInfor = function(event){
    		console.log(event.currentTarget.id);
    		let uniqueElementId = parseInt(event.currentTarget.id.split("-")[1]);
+      $scope.clickedArtistInforTabIdNumber = uniqueElementId;
+      $scope.isArtistInforLoading = true;
    		let artistName = getArtistNameFromHtmlElementId(event.currentTarget.id);
-		let singleArtistName = getOneArtistNameFromArtistName(artistName);
+		  let singleArtistName = getOneArtistNameFromArtistName(artistName);
    		let artistInformation = getArtistInformation(singleArtistName,uniqueElementId);
    };
    function getCleanArtistInformation(artistInformation){
@@ -72,6 +75,7 @@ app.controller('searchResult',[ '$scope', '$http', function($scope, $http) {
 	return artistName;
    }
    function getArtistInformation(artistName,elementId){
+
 	   	let artistNameWithoutSpaces = artistName.replace(" ", "+");
 	   	let url = 'https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch='+artistNameWithoutSpaces+'&format=json&callback=JSON_CALLBACK'
 	   	$http.jsonp(url).then(function(response) {
@@ -95,8 +99,10 @@ app.controller('searchResult',[ '$scope', '$http', function($scope, $http) {
 		    	$scope.results[elementId]["artistInformation"] = cleanArtistInformation.substring(0,100) + "...";
 		    }else{$scope.results[elementId]["artistInformation"] = cleanArtistInformation;}
 		    console.log($scope.results[elementId]["artistInformation"]);
+        $scope.isArtistInforLoading = false;
 		}, function (response) {
-		      console.log(response)
+		      console.log(response);
+          $scope.isArtistInforLoading = false;
 		 	});
     }
 

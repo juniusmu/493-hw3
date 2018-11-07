@@ -91,8 +91,9 @@ h5{
               <p>Type: {{results[secondInPair - 1]['type']}}</p>
               <p>Preview: <a href="{{results[secondInPair - 1]['previewUrl']}}">Link</a></p>
             </div>
-            <div id="{{'artistInfor-' + results[secondInPair - 1]['uniqueId']}}" class="tab-pane fade">
-              <p>{{results[secondInPair - 1]["artistInformation"]}}</p>
+            <div ng-init="myParentId = results[secondInPair - 1]['uniqueId'] " id="{{'artistInfor-' + results[secondInPair - 1]['uniqueId']}}" class="tab-pane fade">
+              <p ng-if="isArtistInforLoading === false || myParentId != clickedArtistInforTabIdNumber">{{results[secondInPair - 1]["artistInformation"]}}</p>
+              <img class="text-center" ng-if="isArtistInforLoading === true && myParentId == clickedArtistInforTabIdNumber" style="height:100px; width:100px" src="loading.gif">
             </div>
           </div>    
         </div>   

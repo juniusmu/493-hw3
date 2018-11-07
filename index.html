@@ -64,66 +64,83 @@ h5{
       </h4>
     </div>
   </div>
-  <div class = "row" ng-repeat="secondInPair in resultPairIndexes" style="height:250px">
-    <div class = "col-lg-6 col-md-6 col-sm-6" >
-      <div class = "col-lg-6 col-md-6 col-sm-6">
-        <img src="{{results[secondInPair - 1]['imageUrl']}}" style="max-width:100%; max-height:200px">
-      </div>
-      <div class = "col-lg-6 col-md-6 col-sm-6">
-        <ul class="nav nav-tabs">
-          <li id="{{'descriptionTab-' + results[secondInPair - 1]['uniqueId']}}" class="active"><a data-toggle="tab" href="{{'#description-' + results[secondInPair - 1]['uniqueId']}}">Description</a></li>
-          <li id="{{'artistInforTab-' + results[secondInPair - 1]['uniqueId']}}" ng-click="getArtistInfor($event)"><a data-toggle="tab" href="{{'#artistInfor-' + results[secondInPair - 1]['uniqueId'] }}">Artist Infor.</a></li>
-        </ul>
-        <div class="tab-content">
-          <div id="{{'description-' + results[secondInPair - 1]['uniqueId']}}" class="tab-pane fade in active">
-            <p>Artist Name: {{results[secondInPair - 1]["name"]}}</p>
-            <p>Collection Name: {{results[secondInPair - 1]['collectionName']}}</p>
-            <p>Pricing: ${{results[secondInPair - 1]['collectionPrice']}}</p>
-            <p>Type: {{results[secondInPair - 1]['type']}}</p>
-            <p>Preview: <a href="{{results[secondInPair - 1]['previewUrl']}}">Link</a></p>
-          </div>
-          <div id="{{'artistInfor-' + results[secondInPair - 1]['uniqueId']}}" class="tab-pane fade">
-            <p>{{results[secondInPair - 1]["artistInformation"]}}</p>
-          </div>
+  
+  
+  
+
+
+  
+  
+
+  <div class="row" ng-repeat="secondInPair in resultPairIndexes" style="height:250px; display: flex;flex-wrap: wrap;  margin-bottom: 100px"> <!-- row -->
+    <div class = "col-lg-6 col-md-6 col-sm-6 col-xs-6" style="margin-bottom: 100px" > <!-- first profile -->
+      <div class="row" style="display: flex;flex-wrap: wrap;">
+        <div class = "col-lg-6 col-md-6 col-sm-6 col-xs-6" style="max-width: 250px; max-height:200px; min-width: 150px; min-width: 150px; margin-top: 25px; margin-bottom: 25px;"> <!-- image -->
+          <img  src="{{results[secondInPair - 1]['imageUrl']}}" style="width: 100%">
         </div>
-          
+        <div class = "col-lg-6 col-md-6 col-sm-6 col-xs-6"> <!-- info -->
+          <ul class="nav nav-tabs">
+            <li id="{{'descriptionTab-' + results[secondInPair - 1]['uniqueId']}}" class="active"><a data-toggle="tab" href="{{'#description-' + results[secondInPair - 1]['uniqueId']}}">Description</a></li>
+            <li id="{{'artistInforTab-' + results[secondInPair - 1]['uniqueId']}}" ng-click="getArtistInfor($event)"><a data-toggle="tab" href="{{'#artistInfor-' + results[secondInPair - 1]['uniqueId'] }}">Artist Infor.</a></li>
+          </ul>
+          <div class="tab-content">
+            <div id="{{'description-' + results[secondInPair - 1]['uniqueId']}}" class="tab-pane fade in active">
+              <p>Artist Name: {{results[secondInPair - 1]["name"]}}</p>
+              <p>Collection Name: {{results[secondInPair - 1]['collectionName']}}</p>
+              <p>Pricing: ${{results[secondInPair - 1]['collectionPrice']}}</p>
+              <p>Type: {{results[secondInPair - 1]['type']}}</p>
+              <p>Preview: <a href="{{results[secondInPair - 1]['previewUrl']}}">Link</a></p>
+            </div>
+            <div id="{{'artistInfor-' + results[secondInPair - 1]['uniqueId']}}" class="tab-pane fade">
+              <p>{{results[secondInPair - 1]["artistInformation"]}}</p>
+            </div>
+          </div>    
+        </div>   
+      </div>
+    </div>  
+    <!-- <div class="clearfix visible-sm"></div> -->
+      
+    
+    <div class = "col-lg-6 col-md-6 col-sm-6 col-xs-6" style="margin-bottom: 100px"> <!-- second profile -->
+      <div class="row" style="display: flex;flex-wrap: wrap;">
+          <div class = "col-lg-6 col-md-6 col-sm-6 col-xs-6" style="max-width: 250px; max-height:200px; min-width: 150px; min-width: 150px; margin-top: 25px; margin-bottom: 25px;"> <!-- image -->
+            <img  src="{{results[secondInPair]['imageUrl']}}" style="width: 100%">
+          </div>
+          <div class = "col-lg-6 col-md-6 col-sm-6 col-xs-6"> <!-- info -->
+            <ul class="nav nav-tabs">
+              <li id="{{'descriptionTab-' + results[secondInPair]['uniqueId']}}" class="active"><a data-toggle="tab" href="{{'#description-' + results[secondInPair]['uniqueId']}}">Description</a></li>
+              <li id="{{'artistInforTab-' + results[secondInPair]['uniqueId']}}" ng-click="getArtistInfor($event)"><a data-toggle="tab" href="{{'#artistInfor-' + results[secondInPair]['uniqueId'] }}">Artist Infor.</a></li>
+            </ul>
+            <div class="tab-content">
+              <div id="{{'description-' + results[secondInPair]['uniqueId']}}" class="tab-pane fade in active">
+                <p>Artist Name: {{results[secondInPair]["name"]}}</p>
+                <p>Collection Name: {{results[secondInPair]['collectionName']}}</p>
+                <p>Pricing: ${{results[secondInPair]['collectionPrice']}}</p>
+                <p>Type: {{results[secondInPair]['type']}}</p>
+                <p>Preview: <a href="{{results[secondInPair]['previewUrl']}}">Link</a></p>
+              </div>
+              <div id="{{'artistInfor-' + results[secondInPair]['uniqueId']}}" class="tab-pane fade">
+                <p>{{results[secondInPair]["artistInformation"]}}</p>
+              </div>
+            </div>
+          </div>  
       </div>
       
+      
     </div>
-    <div class = "col-lg-6 col-md-6 col-sm-6">
-      <div class = "col-lg-6 col-md-6 col-sm-6">
-        <img src="{{results[secondInPair]['imageUrl']}}" style="max-width:100%; max-height:200px">
-      </div>
-      <div class = "col-lg-6 col-md-6 col-sm-6">
-        <ul class="nav nav-tabs">
-          <li id="{{'descriptionTab-' + results[secondInPair]['uniqueId']}}" class="active"><a data-toggle="tab" href="{{'#description-' + results[secondInPair]['uniqueId']}}">Description</a></li>
-          <li id="{{'artistInforTab-' + results[secondInPair]['uniqueId']}}" ng-click="getArtistInfor($event)"><a data-toggle="tab" href="{{'#artistInfor-' + results[secondInPair]['uniqueId'] }}">Artist Infor.</a></li>
-        </ul>
-        <div class="tab-content">
-          <div id="{{'description-' + results[secondInPair]['uniqueId']}}" class="tab-pane fade in active">
-            <p>Artist Name: {{results[secondInPair]["name"]}}</p>
-            <p>Collection Name: {{results[secondInPair]['collectionName']}}</p>
-            <p>Pricing: ${{results[secondInPair]['collectionPrice']}}</p>
-            <p>Type: {{results[secondInPair]['type']}}</p>
-            <p>Preview: <a href="{{results[secondInPair]['previewUrl']}}">Link</a></p>
-          </div>
-          <div id="{{'artistInfor-' + results[secondInPair]['uniqueId']}}" class="tab-pane fade">
-            <p>{{results[secondInPair]["artistInformation"]}}</p>
-          </div>
-        </div>
 
-
-        
-      </div>
-    </div>
+    <!-- <div class="clearfix visible-sm"></div> -->
   </div>
-  <div class="row" ng-if="results.length % 2 == 1" style="height:250px">
-    <div class = "col-lg-6 col-md-6 col-sm-6" >
+
+
+
+  <!-- <div class="row" ng-if="results.length % 2 == 1" style="height:250px; margin-bottom: 25px">
+    <div class = "col-lg-6 col-md-6 col-sm-12" >
       <div >
-        <img src="{{results[results.length - 1]['imageUrl']}}" style="max-width:100%; max-height:200px">
+        <img src="{{results[results.length - 1]['imageUrl']}}" style="width:100%; max-height:200px">
       </div>
     </div>
-    <div class = "col-lg-6 col-md-6 col-sm-6">
+    <div class = "col-lg-6 col-md-6 col-sm-12">
         <ul class="nav nav-tabs">
           <li id="{{'descriptionTab-' + results[results.length - 1]['uniqueId']}}"class="active"><a data-toggle="tab" href="{{'#description-' + results[results.length - 1]['uniqueId']}}">Description</a></li>
           <li id="{{'artistInforTab-' + results[results.length - 1]['uniqueId']}}" ng-click="getArtistInfor($event)"><a data-toggle="tab" href="{{'#artistInfor-' + results[results.length - 1]['uniqueId'] }}">artistInfor</a></li>
@@ -142,7 +159,7 @@ h5{
           </div>
         </div>
       </div>
-  </div>  
+  </div>   -->
 </div>
 </body>
 </html>

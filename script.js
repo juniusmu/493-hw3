@@ -11,6 +11,7 @@ app.controller('searchResult',[ '$scope', '$http', function($scope, $http) {
   	let keyCode = event.keyCode;
   	let enterKeyCode = 13;
   	if(keyCode == enterKeyCode){
+      alert($scope.artistName);
   		getArtistDescription($scope.artistName);
   	}
    };
@@ -74,6 +75,8 @@ app.controller('searchResult',[ '$scope', '$http', function($scope, $http) {
 	   	let artistNameWithoutSpaces = artistName.replace(" ", "+");
 	   	let url = 'https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch='+artistNameWithoutSpaces+'&format=json&callback=JSON_CALLBACK'
 	   	$http.jsonp(url).then(function(response) {
+	   		// Keep this to get credit on assingment
+	   		console.log(response);
 	   		console.log("response data");
 		    console.log(response.data);
 
@@ -98,6 +101,8 @@ app.controller('searchResult',[ '$scope', '$http', function($scope, $http) {
     }
 
   	function getArtistDescription(artistName){
+      // results are set to empty for every new search
+      $scope.results = [];
   		console.log("Searching for " + artistName);
   		artistName
   		let testUrl = "https://itunes.apple.com/search?term="+artistName+"&country=US";
@@ -137,7 +142,8 @@ app.controller('searchResult',[ '$scope', '$http', function($scope, $http) {
   					if(results[i]["collectionName"].length > 25){
   						result["collectionName"] = results[i]["collectionName"].substring(0,25) + "...";
   					}else{result["collectionName"] = results[i]["collectionName"];}
-  					$scope.results.push(result);
+  					// Why am I pushing the result
+            $scope.results.push(result);
   				}
   			}
   		}, function(response){

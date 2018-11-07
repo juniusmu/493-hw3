@@ -86,10 +86,14 @@ app.controller('searchResult',[ '$scope', '$http', function($scope, $http) {
 
 		    let cleanArtistInformation = "Sorry, there is no information for this artist!";
 		    if( response.data["query"]["search"].length != 0){
-		    	console.log("BEFORE:");
-		    	console.log(response.data["query"]["search"][0]["snippet"]);
-		    	let information = response.data["query"]["search"][0]["snippet"];
-		    	cleanArtistInformation = getCleanArtistInformation(information);
+          if("snippet" in response.data["query"]["search"][0]){
+            if(response.data["query"]["search"][0]["snippet"]!= ""){
+              console.log("BEFORE:");
+              console.log(response.data["query"]["search"][0]["snippet"]);
+              let information = response.data["query"]["search"][0]["snippet"];
+              cleanArtistInformation = getCleanArtistInformation(information);
+            }
+          }
 		    }
 		    console.log("AFTER:");
 		    console.log(cleanArtistInformation);

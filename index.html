@@ -118,9 +118,9 @@ h5{
               <p>Type: {{results[secondInPair - 1]['type']}}</p>
               <p>Preview: <a href="{{results[secondInPair - 1]['previewUrl']}}">Link</a></p>
             </div>
-            <div ng-init="myParentId = results[secondInPair - 1]['uniqueId'] " id="{{'artistInfor-' + results[secondInPair - 1]['uniqueId']}}" class="tab-pane fade">
-              <p ng-if="isArtistInforLoading === false || myParentId != clickedArtistInforTabIdNumber">{{results[secondInPair - 1]["artistInformation"]}}</p>
-              <img class="text-center" ng-if="isArtistInforLoading === true && myParentId == clickedArtistInforTabIdNumber" style="height:100px; width:100px" src="loading.gif">
+            <div ng-init="myParentId1 = results[secondInPair - 1]['uniqueId'] " id="{{'artistInfor-' + results[secondInPair - 1]['uniqueId']}}" class="tab-pane fade">
+              <p ng-if="isArtistInforLoading === false || myParentId1 != clickedArtistInforTabIdNumber">{{results[secondInPair - 1]["artistInformation"]}}</p>
+              <img class="text-center" ng-if="isArtistInforLoading === true && myParentId1 == clickedArtistInforTabIdNumber" style="height:100px; width:100px" src="loading.gif">
             </div>
           </div>    
         </div>   
@@ -147,9 +147,9 @@ h5{
                 <p>Type: {{results[secondInPair]['type']}}</p>
                 <p>Preview: <a href="{{results[secondInPair]['previewUrl']}}">Link</a></p>
               </div>
-              <div ng-init="myParentId = results[secondInPair]['uniqueId'] " id="{{'artistInfor-' + results[secondInPair]['uniqueId']}}" class="tab-pane fade">
-              <p ng-if="isArtistInforLoading === false || myParentId != clickedArtistInforTabIdNumber">{{results[secondInPair]["artistInformation"]}}</p>
-              <img class="text-center" ng-if="isArtistInforLoading === true && myParentId == clickedArtistInforTabIdNumber" style="height:100px; width:100px" src="loading.gif">
+              <div ng-init="myParentId2 = results[secondInPair]['uniqueId'] " id="{{'artistInfor-' + results[secondInPair]['uniqueId']}}" class="tab-pane fade">
+              <p ng-if="isArtistInforLoading === false || myParentId2 != clickedArtistInforTabIdNumber">{{results[secondInPair]["artistInformation"]}}</p>
+              <img class="text-center" ng-if="isArtistInforLoading === true && myParentId2 == clickedArtistInforTabIdNumber" style="height:100px; width:100px" src="loading.gif">
             </div>
             </div>
           </div>  
